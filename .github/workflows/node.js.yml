@@ -29,8 +29,8 @@ jobs:
           fetch-depth: 0
     - uses: sonarsource/sonarqube-scan-action@master
       env:
-          SONAR_TOKEN: 7c52cc4b282b6ff80a997fada598cee78a294d2c
-          SONAR_HOST_URL: https://ba83-202-83-17-224.ngrok.io
+          SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
+          SONAR_HOST_URL:  https://ba83-202-83-17-224.ngrok.io
   
   rollback-content:
      name: 'Rollback the release'
