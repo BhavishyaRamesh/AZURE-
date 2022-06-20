@@ -30,7 +30,7 @@ jobs:
     - uses: sonarsource/sonarqube-scan-action@master
       env:
           SONAR_TOKEN: d3300f6794144e121ecf8f4b58dbe8c00eeb20fb
-          SONAR_HOST_URL: https://6cb6-14-98-199-230.ngrok.io
+          SONAR_HOST_URL: https://ba83-202-83-17-224.ngrok.io
   
   rollback-content:
      name: 'Rollback the release'
