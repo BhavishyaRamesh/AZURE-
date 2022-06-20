@@ -29,7 +29,7 @@ jobs:
           fetch-depth: 0
     - uses: sonarsource/sonarqube-scan-action@master
       env:
-          SONAR_TOKEN: d3300f6794144e121ecf8f4b58dbe8c00eeb20fb
+          SONAR_TOKEN: 7c52cc4b282b6ff80a997fada598cee78a294d2c
           SONAR_HOST_URL: https://ba83-202-83-17-224.ngrok.io
   
   rollback-content:
