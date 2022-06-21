@@ -14,6 +14,19 @@ jobs:
       matrix:
         node-version: [12.x ]
     steps:
+    - uses: actions/checkout@v2
+      with:
+          fetch-depth: 0
+    - uses: sonarsource/sonarqube-scan-action@master
+      env:
+          SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
+          SONAR_HOST_URL: https://c6c7-2409-4071-d97-d844-8059-e124-43cd-420c.ngrok.io
+      # If you wish to fail your job when the Quality Gate is red, uncomment the
+      # following lines. This would typically be used to fail a deployment.
+    - uses: sonarsource/sonarqube-quality-gate-action@master
+      timeout-minutes: 5
+      env:
+          SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
