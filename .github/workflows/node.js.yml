@@ -22,7 +22,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - id: latest
-      uses: thebritican/fetch-latest-release@v1.0.3
+      uses: thebritican/fetch-latest-release@v41
       with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
   
