@@ -36,7 +36,7 @@ jobs:
       runs-on: ubuntu-latest 
       steps:
       - id: latest
-        if: build.failure( )
+        if: failure('build')
         uses: thebritican/fetch-latest-release@v1.0.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
