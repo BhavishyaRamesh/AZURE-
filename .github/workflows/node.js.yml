@@ -31,7 +31,6 @@ jobs:
       with:
           release_id: 8df0474
           tag: 'v15'
-          delete_orphan_tag: true
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
