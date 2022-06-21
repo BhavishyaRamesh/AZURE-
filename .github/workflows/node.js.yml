@@ -14,14 +14,6 @@ jobs:
       matrix:
         node-version: [12.x ]
     steps:
-    - id: latest
-      uses: thebritican/fetch-latest-release@v1.0.3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-
-    - uses: actions/checkout@v2
-      with: 
-        ref: ${{ steps.latest.outputs.tag_name }}
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -30,20 +22,16 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm test
-    
-  rollback-content:
-      name: 'Rollback'
-      runs-on: ubuntu-latest 
-      steps:
-      - id: latest
-        if: failure('build')
-        uses: thebritican/fetch-latest-release@v1.0.3
-        with:
+    - id: latest
+      if: failure()
+      uses: thebritican/fetch-latest-release@v1.0.3
+      with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/checkout@v2
-        with: 
+    - uses: actions/checkout@v2
+      with: 
           ref: ${{ steps.latest.outputs.tag_name }}
+    
   release-content:
       name: 'Release'
       runs-on: ubuntu-latest 
