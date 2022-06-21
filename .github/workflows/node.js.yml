@@ -56,10 +56,9 @@ jobs:
   rollback-content:
      name: 'Rollback the release'
      runs-on: ubuntu-latest
-     needs: [ 'build', 'release-content']
      steps:
        - name: Rollback Release
-         if: failure() && steps.create_release.outputs.id != '8df0474'
+         if: failure()
          uses: author/action-rollback@stable
          with:
             release_id: 8df0474
