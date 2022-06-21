@@ -24,7 +24,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm test
     - name: Rollback Release
       if: failure()
       uses: author/action-rollback@stable
