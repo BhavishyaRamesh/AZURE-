@@ -33,6 +33,14 @@ jobs:
       with: 
           ref: ${{ steps.latest.outputs.tag_name }}
     
+    - id: create_release
+      if: failure()
+      uses: actions/create-release@v1.0.0
+      env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+         ref: ${{ steps.latest.outputs.tag_name }}
+    
   release-content:
       name: 'Release'
       runs-on: ubuntu-latest 
