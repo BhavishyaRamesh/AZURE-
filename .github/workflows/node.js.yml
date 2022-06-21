@@ -33,7 +33,7 @@ jobs:
           tag: 'v15'
           delete_orphan_tag: true
       env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
   release-content:
       name: 'Release'
