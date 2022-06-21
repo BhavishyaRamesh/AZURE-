@@ -44,7 +44,5 @@ jobs:
         with:
           node-version: 16
           cache: npm
-      - run: npm ci
-      - name: Ensure dependencies are compatible with the version of node
-        run: npx ls-engines@0.4
-      - run: npm run lint
+      - run: npm ci    
+      
