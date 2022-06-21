@@ -21,7 +21,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    
+    - run: npm test
     - id: latest
       if: failure()
       uses: thebritican/fetch-latest-release@v1.0.3
