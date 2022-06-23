@@ -90,7 +90,7 @@ jobs:
            server_address: smtp.gmail.com
            server_port: 465
     # user credentials
-           username: bhavishyaramesh@gmail.com
+           username: bhavishyaramesh02@gmail.com
            password: Ramesh@0214
     # email subject
            subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
