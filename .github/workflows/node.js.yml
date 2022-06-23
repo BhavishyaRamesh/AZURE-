@@ -6,7 +6,7 @@ on:
         - master
 
 jobs:
-  build:
+  SonarQube:
 
     runs-on: ubuntu-latest
 
@@ -19,8 +19,8 @@ jobs:
           fetch-depth: 0
     - uses: sonarsource/sonarqube-scan-action@master
       env:
-          SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-          SONAR_HOST_URL: https://3e21-14-98-199-230.ngrok.io 
+        SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
+        SONAR_HOST_URL: https://3e21-14-98-199-230.ngrok.io 
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
     - uses: sonarsource/sonarqube-quality-gate-action@master
@@ -28,34 +28,34 @@ jobs:
       timeout-minutes: 5
       env:
           SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - id: latest
-      if: failure()
-      uses: thebritican/fetch-latest-release@v1.0.3
-      with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    #- uses: actions/checkout@v3
+    #- name: Use Node.js ${{ matrix.node-version }}
+    #  uses: actions/setup-node@v3
+    #  with:
+    #    node-version: ${{ matrix.node-version }}
+    #    cache: 'npm'
+    #- run: npm ci
+    #- id: latest
+    #  if: failure()
+     # uses: thebritican/fetch-latest-release@v1.0.3
+     # with:
+         # github_token: ${{ secrets.GITHUB_TOKEN }}
 
-    - uses: actions/checkout@v2
-      if: failure()
-      with: 
-          ref: ${{ steps.latest.outputs.tag_name }}         
+   # - uses: actions/checkout@v2
+     # if: failure()
+     # with: 
+         # ref: ${{ steps.latest.outputs.tag_name }}         
     
-    - id: create_release
-      if: failure()
-      uses: actions/create-release@v1.0.0
-      env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-         tag_name: ${{ steps.latest.outputs.tag_name }}
-         release_name: ${{ steps.latest.outputs.tag_name }}
-         draft: true
-         prerelease: true
+    #- id: create_release
+     # if: failure()
+     # uses: actions/create-release@v1.0.0
+     # env:
+     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # with:
+        # tag_name: ${{ steps.latest.outputs.tag_name }}
+        # release_name: ${{ steps.latest.outputs.tag_name }}
+        # draft: true
+        # prerelease: true
   
     - name: Send mail
       if: always()
@@ -76,26 +76,26 @@ jobs:
     # from email name
          from: Bhavishya R
     
-  release-content:
-      name: 'Release'
-      runs-on: ubuntu-latest 
-      needs: [ build ]
-      steps:
-      - name: Tag
-        id: autotagger
-        uses: butlerlogic/action-autotag@stable
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  #release-content:
+  #    name: 'Release'
+  #    runs-on: ubuntu-latest 
+  #    needs: [ build ]
+  #    steps:
+  #    - name: Tag
+  #      id: autotagger
+  #      uses: butlerlogic/action-autotag@stable
+  #      with:
+  #        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       
-      - name: Release
-        id: create_release
-        uses: actions/create-release@v1.0.0
-        env:
-           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-           tag_name: V${{ github.run_number }}
-           release_name: V${{ github.run_number }}
-           body: ${{ github.run_number }}
+   #   - name: Release
+   #     id: create_release
+   #     uses: actions/create-release@v1.0.0
+   #     env:
+   #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+   #     with:
+   #        tag_name: V${{ github.run_number }}
+   #        release_name: V${{ github.run_number }}
+   #        body: ${{ github.run_number }}
      
            
   
