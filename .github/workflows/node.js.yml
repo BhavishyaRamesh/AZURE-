@@ -56,6 +56,25 @@ jobs:
          release_name: ${{ steps.latest.outputs.tag_name }}
          draft: true
          prerelease: true
+  
+    - name: Send mail
+      if: always()
+      uses: dawidd6/action-send-mail@v2
+      with:
+    # mail server settings
+         server_address: smtp.gmail.com
+         server_port: 465
+    # user credentials
+         username: bhavishyaramesh02@gmail.com
+         password: uwxxvjgrythvmhcn
+    # email subject
+         subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+    # email body as text
+         body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+    # comma-separated string, send email to
+         to: rameshramu622@gmail.com
+    # from email name
+         from: Bhavishya R
     
   release-content:
       name: 'Release'
@@ -77,26 +96,7 @@ jobs:
            tag_name: V${{ github.run_number }}
            release_name: V${{ github.run_number }}
            body: ${{ github.run_number }}
+     
            
-  Email-notification:
-      name: 'Email'
-      runs-on: ubuntu-latest 
-      steps:
-      - name: Send mail
-        if: always()
-        uses: dawidd6/action-send-mail@v2
-        with:
-    # mail server settings
-           server_address: smtp.gmail.com
-           server_port: 465
-    # user credentials
-           username: bhavishyaramesh02@gmail.com
-           password: uwxxvjgrythvmhcn
-    # email subject
-           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
-    # email body as text
-           body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-    # comma-separated string, send email to
-           to: rameshramu622@gmail.com
-    # from email name
-           from: Bhavishya R
+  
+      
