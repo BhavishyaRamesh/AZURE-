@@ -20,7 +20,7 @@ jobs:
     - uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-        SONAR_HOST_URL: https://3e21-14-98-199-230.ngrok.io 
+        SONAR_HOST_URL: https://75eb-14-98-199-230.ngrok.io 
       # If you wish to fail your job when the Quality Gate is red, uncomment the
       # following lines. This would typically be used to fail a deployment.
     - uses: sonarsource/sonarqube-quality-gate-action@master
@@ -28,16 +28,18 @@ jobs:
       timeout-minutes: 5
       env:
           SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-    #- uses: actions/checkout@v3
-    #- name: Use Node.js ${{ matrix.node-version }}
-    #  uses: actions/setup-node@v3
-    #  with:
-    #    node-version: ${{ matrix.node-version }}
-    #    cache: 'npm'
-    #- run: npm ci
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run linter
+    - run: npm test  
     #- id: latest
     #  if: failure()
-     # uses: thebritican/fetch-latest-release@v1.0.3
+    #  uses: thebritican/fetch-latest-release@v1.0.3
      # with:
          # github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -72,7 +74,7 @@ jobs:
     # email body as text
          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
     # comma-separated string, send email to
-         to: rameshramu622@gmail.com
+         to: bhavishyaramesh02@gmail.com
     # from email name
          from: Bhavishya R
     
