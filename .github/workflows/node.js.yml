@@ -36,7 +36,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
   
-    - run: npm test  
+    
     #- id: latest
     #  if: failure()
     #  uses: thebritican/fetch-latest-release@v1.0.3
@@ -76,7 +76,7 @@ jobs:
     # comma-separated string, send email to
          to: bhavishyaramesh02@gmail.com , fsaurabh666@gmail.com , rameshramu622@gmail.com
     # from email name
-         from: Bhavishya R
+         from: GitHub
     
   #release-content:
   #    name: 'Release'
