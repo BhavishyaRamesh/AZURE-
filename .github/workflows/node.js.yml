@@ -6,27 +6,14 @@ on:
         - master
 
 jobs:
-  run_qa:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - run: ./test/run-qa.sh
-        timeout-minutes: 5
-    services:
-      sonarqube:
-        image: sonarqube:8.9-community
-        ports:
-          - 9000:9000
-   #SonarQube:
-   # runs-on: ubuntu-latest
-   # strategy:
-   #   matrix:
-   #     node-version: [12.x ]
-   # steps:
-   # - uses: actions/checkout@v2
-   #   with:
+   SonarQube:
+     runs-on: ubuntu-latest
+     strategy:
+      matrix:
+        node-version: [12.x ]
+     steps:
+   #  - uses: actions/checkout@v2
+   #    with:
    #       fetch-depth: 0
    # - uses: sonarsource/sonarqube-scan-action@master
    #   env:
@@ -39,13 +26,17 @@ jobs:
    #   timeout-minutes: 5
    #   env:
    #       SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-   # - uses: actions/checkout@v3
-   # - name: Use Node.js ${{ matrix.node-version }}
-   #   uses: actions/setup-node@v3
-   #   with:
-   #     node-version: ${{ matrix.node-version }}
-   #     cache: 'npm'
-   # - run: npm ci
+     - uses: actions/checkout@v3
+     - name: Use Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v3
+       with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+     - run: npm ci
+     - uses: actions/checkout@v1
+     - uses: ArtiomTr/jest-coverage-report-action@v2
+       with:
+         github-token: ${{ secrets.SECRET_TOKEN }}
         
     #- id: latest
     #  if: failure()
