@@ -32,6 +32,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
      - run: npm ci
+     - run: npm --max_old_space_size=8182 start
      - uses: actions/checkout@v1
      - uses: ArtiomTr/jest-coverage-report-action@v2
        with:
