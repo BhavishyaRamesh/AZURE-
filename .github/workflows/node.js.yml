@@ -67,7 +67,7 @@ jobs:
        - name: Download Artifacts
          uses: actions/download-artifact@v3
          with:
-            name: new
+            name: my-artifact
        - name: Test-artifact
          run: ls -R
   #    - name: Tag
