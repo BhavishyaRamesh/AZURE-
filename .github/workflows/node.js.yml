@@ -79,11 +79,17 @@ jobs:
     # from email name
          from: GitHub
     
-  #release-content:
-  #    name: 'Release'
-  #    runs-on: ubuntu-latest 
-  #    needs: [ build ]
-  #    steps:
+   release-content:
+       name: 'Release'
+       runs-on: ubuntu-latest 
+       needs: [ build ]
+       steps:
+       - name: Download Artifacts
+         uses: actions/download-artifacts@v3
+         with:
+            name: new
+       - name: Test-artifact
+         run: ls -R
   #    - name: Tag
   #      id: autotagger
   #      uses: butlerlogic/action-autotag@stable
