@@ -32,7 +32,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
      - run: npm ci
-            
+     - uses: actions/upload-artifact@v3
+       with:
+         name: my-artifact
+         path: .next/       
     #- id: latest
     #  if: failure()
     #  uses: thebritican/fetch-latest-release@v1.0.3
