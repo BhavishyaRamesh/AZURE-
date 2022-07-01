@@ -78,11 +78,10 @@ jobs:
          to: bhavishyaramesh02@gmail.com 
     # from email name
          from: GitHub
-    
-   release-content:
+  release-content:
        name: 'Release'
        runs-on: ubuntu-latest 
-       needs: [ build ]
+       needs: [ sonarqube ]
        steps:
        - name: Download Artifacts
          uses: actions/download-artifacts@v3
