@@ -32,13 +32,12 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
      - run: npm ci
-     - name: Archive production artifacts
-       uses: actions/upload-artifact@v3
+     - run: mkdir -p path/to/artifact
+     - name: Upload Artifact
+       uses: actions/upload-artifact@v2
        with:
-          name: dist-without-markdown
-          path: |
-            dist
-            !dist/**/*.md     
+          name: my-artifact
+          path: path/to/my-artifact     
     #- id: latest
     #  if: failure()
     #  uses: thebritican/fetch-latest-release@v1.0.3
@@ -63,19 +62,17 @@ jobs:
   
    
   release-content:
-       name: 'Release'
-       runs-on: ubuntu-latest 
-       needs: [ sonarqube ]
-       steps:
-       - name: Download Artifacts
-         uses: actions/download-artifact@v3
-          with:
-             name: dist-without-markdown
-             path: |
-               dist
-               !dist/**/*.md 
-       - name: Test-artifact
-         run: ls -R
+     name: 'Release'
+     runs-on: ubuntu-latest 
+     needs: [ sonarqube ]
+     steps:
+     - name: Download Artifacts
+       uses: actions/download-artifact@v3
+        with:
+             name: my-artifact
+             path: path/to/my-artifact   
+     - name: Test-artifact
+       run: ls -R
   #    - name: Tag
   #      id: autotagger
   #      uses: butlerlogic/action-autotag@stable
