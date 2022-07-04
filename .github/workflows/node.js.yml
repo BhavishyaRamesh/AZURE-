@@ -37,8 +37,8 @@ jobs:
      - name: Upload Artifact
        uses: actions/upload-artifact@v2
        with:
-          name: my-artifact
-          path: path/to/my-artifact     
+          name: build
+          path: build     
     #- id: latest
     #  if: failure()
     #  uses: thebritican/fetch-latest-release@v1.0.3
@@ -70,8 +70,8 @@ jobs:
      - name: Download Artifacts
        uses: actions/download-artifact@v3
        with:
-           name: my-artifact
-           path: path/to/my-artifact   
+           name: build
+           path: build   
      - name: Test-artifact
        run: ls -R
   #    - name: Tag
