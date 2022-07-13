@@ -35,8 +35,9 @@ jobs:
      - run: npm ci
      - run: yarn run build --if-present
      - run: npm install -g eslint
-     - name: Run ESLint
-       run: eslint . .js
+     - uses: stefanoeb/eslint-action@1.0.2
+       with:
+          files: src/
      - name: Upload Artifact
        uses: actions/upload-artifact@v3
        with:
