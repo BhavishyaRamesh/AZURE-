@@ -11,9 +11,7 @@ jobs:
       matrix:
         node-version: [12.x ]
      steps:
-     - uses: actions/checkout@v2
-     - name: Analyze code statically using JSHint
-       uses: moneyforward/jshint-action@v0
+   
    #  - uses: actions/checkout@v2
    #    with:
    #       fetch-depth: 0
@@ -36,6 +34,8 @@ jobs:
         cache: 'npm'
      - run: npm ci
      - run: yarn run build --if-present
+     - name: Run ESLint
+       run: eslint . --ext .js,.jsx,.ts,.tsx
      - name: Upload Artifact
        uses: actions/upload-artifact@v3
        with:
