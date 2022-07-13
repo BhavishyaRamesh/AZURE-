@@ -35,11 +35,7 @@ jobs:
      - run: npm ci
      - run: yarn run build --if-present
      - run: npm install -g eslint
-     - uses: sibiraj-s/action-eslint@v2
-       with: 
-         eslintFiles: "lib, scripts"
-         eslintConfig: "myConfigs/eslint.config.js",
-         eslintExt: " ts, tsx "
+     - run: eslint . --ext .js,.ts
      - name: Upload Artifact
        uses: actions/upload-artifact@v3
        with:
