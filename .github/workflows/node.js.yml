@@ -36,8 +36,8 @@ jobs:
      - run: yarn run build --if-present
      - run: npm install -g jshint
   #   - run: eslint --fix .
-     - name: Run ESLint
-       run: jshint . --ext .js,.jsx,.ts,.tsx
+     - name: Run JSHint
+       run: jshint . '["--extra-ext", ".js"]'
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
