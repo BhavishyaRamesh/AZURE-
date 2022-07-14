@@ -37,7 +37,9 @@ jobs:
      - run: npm install -g jshint
   #   - run: eslint --fix .
      - name: Run JSHint
-       run: jshint . '["--extra-ext", ".js"]'
+       uses: drugscom/jshint-action@v1
+       with:
+         path: src/**/*.js
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
