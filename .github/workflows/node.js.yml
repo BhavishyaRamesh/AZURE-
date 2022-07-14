@@ -35,6 +35,7 @@ jobs:
      - run: npm ci
      - run: yarn run build --if-present
      - run: npm install -g eslint
+     - run: eslint --fix .
      - name: Run ESLint
        run: eslint . --ext .js,.jsx,.ts,.tsx
   #   - name: Upload Artifact
