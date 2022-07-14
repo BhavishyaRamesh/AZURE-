@@ -26,12 +26,17 @@ jobs:
    #   timeout-minutes: 5
    #   env:
    #       SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-     - uses: actions/checkout@v2
-     - name: Install modules
-       run: yarn
-     - run: yarn install -g eslint
+     - uses: actions/checkout@v3
+     - name: Use Node.js ${{ matrix.node-version }}
+       uses: actions/setup-node@v3
+       with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+     - run: npm ci
+     - run: yarn run build --if-present
+     - run: npm install -g eslint
      - name: Run ESLint
-       run: eslint . --ext .js,.jsx,.ts,.tsx
+       run: eslint . .js
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
