@@ -36,10 +36,7 @@ jobs:
      - run: yarn run build --if-present
      - run: npm install -g jshint
   #   - run: eslint --fix .
-     - name: Run JSHint
-       uses: drugscom/jshint-action@v1
-       with:
-         path: --extra-ext .js,.jsx,.ts,.tsx
+     - run: jshint --exclude="node_modules/" path/to/javascript
 
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
