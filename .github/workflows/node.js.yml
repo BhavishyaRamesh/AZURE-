@@ -36,13 +36,7 @@ jobs:
      - run: yarn run build --if-present
      - run: npm install -g eslint
   #   - run: eslint --fix .
-     - uses: actions/checkout@v2
-     - name: Analyze code statically using ESLint
-       uses: moneyforward/eslint-action@v0
-       with:
-          files: '.'
-          options: '["--ext", ".ts"]'
-
+     - run: eslint 
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
