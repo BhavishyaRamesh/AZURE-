@@ -34,9 +34,9 @@ jobs:
         cache: 'npm'
      - run: npm ci
      - run: yarn run build --if-present
-     - run: npm install -g eslint
+     - run: npm install -g jshint
   #   - run: eslint --fix .
-     - run: eslint 
+     - run: jshint . --ext .js,.jsx,.ts,.tsx
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
