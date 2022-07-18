@@ -41,7 +41,7 @@ jobs:
        uses: moneyforward/eslint-action@v0
        with:
           files: '.'
-  #        options: '["--ext", ".ts"]'
+          options: '["--ext", ".ts"]'
 
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
