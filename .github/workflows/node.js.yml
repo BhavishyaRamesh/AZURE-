@@ -35,10 +35,9 @@ jobs:
      - run: npm install
      - run: yarn run build --if-present
      - run: npm install -g jslint
-     - name: Analyze code statically using ESLint
-       uses: moneyforward/eslint-action@v0
-       with:
-         files: '.js,.jsx,.ts,.tsx'
+     - uses: actions/checkout@v2
+     - name: Analyze code statically using JSHint
+       uses: moneyforward/jshint-action@v0
           
   #   - run: eslint --fix .
   #   - run: jshint . --ext .js,.jsx,.ts,.tsx
