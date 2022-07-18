@@ -35,7 +35,11 @@ jobs:
      - run: npm install
      - run: yarn run build --if-present
      - run: npm install -g eslint
-     - run: eslint . --ext .js,.jsx,.ts,.tsx
+  #   - run: eslint . --ext .js,.jsx,.ts,.tsx
+     - uses: actions/checkout@v1
+     - uses: stefanoeb/eslint-action@1.0.2
+       with:
+          files: src/
           
   #   - run: eslint --fix .
   #   - run: jshint . --ext .js,.jsx,.ts,.tsx
