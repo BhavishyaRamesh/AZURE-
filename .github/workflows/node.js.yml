@@ -38,9 +38,8 @@ jobs:
      - name: Analyze code statically using ESLint
        uses: moneyforward/eslint-action@v0
        with:
-         eslint-args: '--ignore-path=.gitignore --quiet'
-         extensions: 'js,jsx,ts,tsx'
-         annotations: true
+         files: '.js,.jsx,.ts,.tsx'
+          
   #   - run: eslint --fix .
   #   - run: jshint . --ext .js,.jsx,.ts,.tsx
   #   - name: Upload Artifact
