@@ -35,7 +35,12 @@ jobs:
      - run: npm install
      - run: yarn run build --if-present
      - run: npm install -g jslint
-     - run: jslint .mjs
+     - uses: sibiraj-s/action-eslint@v2
+        with:
+#          github-token: ${{ secrets.GITHUB_TOKEN }} # Optional
+          eslint-args: '--ignore-path=.gitignore --quiet'
+          extensions: 'js,jsx,ts,tsx'
+          annotations: true
   #   - run: eslint --fix .
   #   - run: jshint . --ext .js,.jsx,.ts,.tsx
   #   - name: Upload Artifact
