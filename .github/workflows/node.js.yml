@@ -36,7 +36,7 @@ jobs:
      - run: yarn run build --if-present
      - run: npm install -g jshint
   #   - run: eslint --fix .
-     - run: jshint --exclude="node_modules/" path/to/javascript
+     - run: jshint '["--extra-ext", ".js",".jsx",".ts",:.tsx"]'
 
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
