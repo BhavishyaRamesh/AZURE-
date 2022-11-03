@@ -25,10 +25,10 @@ jobs:
          with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-       - uses: actions/checkout@v2
-         if: failure()
-         with: 
-            ref: ${{ steps.latest.outputs.tag_name }}         
+ #      - uses: actions/checkout@v2
+ #        if: failure()
+ #        with: 
+ #           ref: ${{ steps.latest.outputs.tag_name }}         
     
        - id: create_release
          if: failure()
