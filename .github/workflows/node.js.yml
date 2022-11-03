@@ -11,101 +11,68 @@ jobs:
       matrix:
         node-version: [16.14.0 ]
      steps:
-   
-   #  - uses: actions/checkout@v2
-   #    with:
-   #       fetch-depth: 0
-   # - uses: sonarsource/sonarqube-scan-action@master
-   #   env:
-   #     SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-   #     SONAR_HOST_URL: https://75eb-14-98-199-230.ngrok.io 
-      # If you wish to fail your job when the Quality Gate is red, uncomment the
-      # following lines. This would typically be used to fail a deployment.
-   # - uses: sonarsource/sonarqube-quality-gate-action@master
-   #   name: SonarQube Quality Gate check
-   #   timeout-minutes: 5
-   #   env:
-   #       SONAR_TOKEN: 340c687101aa465b7760cff37a3656da027d6928
-     - name: Run JMeter Action on a test
-       uses: rbhadti94/apache-jmeter-action@v0.5.0
-       with:
-          testFilePath: tests/sample_test.jmx
-          outputReportsFolder: reports/
-          args: "--loglevel INFO"
-     - uses: actions/checkout@v3
-     - name: Use Node.js ${{ matrix.node-version }}
-       uses: actions/setup-node@v3
-       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-     - run: npm update
-     - run: npm ci
-  #   - run: yarn run build --if-present
-     - run: npm install -g eslint
-     - run: eslint . --ext .js,.jsx,.ts,.tsx
-  #   - run: eslint . --ext .js,.jsx,.ts,.tsx
-  #   - uses: actions/checkout@v1
-  #   - uses: stefanoeb/eslint-action@1.0.2
-  #     with:
-  #        files: src/
-          
-  #   - run: eslint --fix .
-  #   - run: jshint . --ext .js,.jsx,.ts,.tsx
+       - uses: actions/setup-node@v3
+         with:
+           node-version: ${{ matrix.node-version }}
+           cache: 'npm'
+       - run: npm update
+       - run: npm ci
+  
   #   - name: Upload Artifact
   #     uses: actions/upload-artifact@v3
   #     with:
   #        name: build
   #        path: build  
-    #- id: latest
-    #  if: failure()
-    #  uses: thebritican/fetch-latest-release@v1.0.3
-     # with:
-         # github_token: ${{ secrets.GITHUB_TOKEN }}
+       - id: latest
+         if: failure()
+         uses: thebritican/fetch-latest-release@v1.0.3
+         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
 
-   # - uses: actions/checkout@v2
-     # if: failure()
-     # with: 
-         # ref: ${{ steps.latest.outputs.tag_name }}         
+       - uses: actions/checkout@v2
+         if: failure()
+         with: 
+            ref: ${{ steps.latest.outputs.tag_name }}         
     
-    #- id: create_release
-     # if: failure()
-     # uses: actions/create-release@v1.0.0
-     # env:
-     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # with:
-        # tag_name: ${{ steps.latest.outputs.tag_name }}
-        # release_name: ${{ steps.latest.outputs.tag_name }}
-        # draft: true
-        # prerelease: true
+       - id: create_release
+         if: failure()
+         uses: actions/create-release@v1.0.0
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+           tag_name: ${{ steps.latest.outputs.tag_name }}
+           release_name: ${{ steps.latest.outputs.tag_name }}
+           draft: true
+           prerelease: true
   
    
-#  release-content:
-#     name: 'Release'
-#     runs-on: ubuntu-latest 
-#     needs: [ sonarqube ]
-#     steps:
-#     - name: Download Artifacts
-#       uses: actions/download-artifact@v3
-#       with:
-#           name: build
-#           path: build 
-#     - name: Test-artifact
-#       run: ls -R
-  #    - name: Tag
-  #      id: autotagger
-  #      uses: butlerlogic/action-autotag@stable
-  #      with:
-  #        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-      
-   #   - name: Release
-   #     id: create_release
-   #     uses: actions/create-release@v1.0.0
-   #     env:
-   #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   #     with:
-   #        tag_name: V${{ github.run_number }}
-   #        release_name: V${{ github.run_number }}
-   #        body: ${{ github.run_number }}
+  release-content:
+     name: 'Release'
+     runs-on: ubuntu-latest 
+     needs: [ sonarqube ]
+     steps:
+       - name: Download Artifacts
+         uses: actions/download-artifact@v3
+         with:
+             name: build
+             path: build 
+       - name: Test-artifact
+         run: ls -R
+       - name: Tag
+         id: autotagger
+         uses: butlerlogic/action-autotag@stable
+         with:
+           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        
+       - name: Release
+         id: create_release
+         uses: actions/create-release@v1.0.0
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+            tag_name: V${{ github.run_number }}
+            release_name: V${{ github.run_number }}
+            body: ${{ github.run_number }}
      
            
   
