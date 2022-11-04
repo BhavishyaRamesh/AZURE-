@@ -50,8 +50,8 @@ jobs:
           secure: true
           secureConnection: false
     # user credentials
-          username: ramesh@worksitebas.com
-          password: abgr ndqa qcjh bhbh
+          username: bhavishyaramesh02@gnail.com
+          password: zpkakliygaunudvo
     # email subject
           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
     # email body as text
