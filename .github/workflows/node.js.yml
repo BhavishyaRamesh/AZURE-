@@ -16,30 +16,30 @@ jobs:
            node-version: ${{ matrix.node-version }}
            cache: 'npm'
        - run: npm update
-       - run: npm ci
+ #      - run: npm ci
   
      
-       - id: latest
-         if: failure()
-         uses: thebritican/fetch-latest-release@v1.0.3
-         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+ #      - id: latest
+ #        if: failure()
+ #        uses: thebritican/fetch-latest-release@v1.0.3
+ #        with:
+ #         github_token: ${{ secrets.GITHUB_TOKEN }}
 
  #      - uses: actions/checkout@v2
  #        if: failure()
  #        with: 
  #           ref: ${{ steps.latest.outputs.tag_name }}         
     
-       - id: create_release
-         if: failure()
-         uses: actions/create-release@v1.0.0
-         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         with:
-           tag_name: ${{ steps.latest.outputs.tag_name }}
-           release_name: ${{ steps.latest.outputs.tag_name }}
-           draft: true
-           prerelease: true
+ #      - id: create_release
+ #        if: failure()
+ #        uses: actions/create-release@v1.0.0
+ #        env:
+ #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+ #        with:
+ #          tag_name: ${{ steps.latest.outputs.tag_name }}
+ #          release_name: ${{ steps.latest.outputs.tag_name }}
+ #          draft: true
+ #          prerelease: true
        - name: Send mail
          if: always()
          uses: dawidd6/action-send-mail@v2
@@ -49,7 +49,7 @@ jobs:
            server_port: 465
     # user credentials
            username: bhavishyaramesh02@gmail.com
-           password: uwxxvjgrythvmhcn
+           password: zpkakliygaunudvo
     # email subject
            subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
     # email body as text
