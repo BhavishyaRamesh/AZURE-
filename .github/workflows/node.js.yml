@@ -45,22 +45,19 @@ jobs:
          uses: dawidd6/action-send-mail@v2
          with:
     # mail server settings
-          server_address: smtp.gmail.com
-          server_port: 465
-          secure: true
-          secureConnection: false
+           server_address: smtp.gmail.com
+           server_port: 465
     # user credentials
-          username: bhavishyaramesh02@gnail.com
-          password: Bhavishya@)02
-          
+           username: bhavishyaramesh02@gmail.com
+           password: uwxxvjgrythvmhcn
     # email subject
-          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+           subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
     # email body as text
-          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+           body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
     # comma-separated string, send email to
-          to: bhavishyaramesh02@gmail.com
+           to: bhavishyaramesh02@gmail.com
     # from email name
-          from: OMHealth 
+           from: GitHub
   
    
   release-content:
