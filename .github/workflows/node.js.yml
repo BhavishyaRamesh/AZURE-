@@ -16,7 +16,7 @@ jobs:
            node-version: ${{ matrix.node-version }}
            cache: 'npm'
        - run: npm update
-       - run: npm 
+       - run: npm ci
   
      
        - id: latest
@@ -40,6 +40,26 @@ jobs:
            release_name: ${{ steps.latest.outputs.tag_name }}
            draft: true
            prerelease: true
+       - name: Send mail
+         if: always()
+         uses: dawidd6/action-send-mail@v2
+         with:
+    # mail server settings
+          server_address: smtp.gmail.com
+          server_port: 465
+          secure: true
+          secureConnection: false
+    # user credentials
+          username: ramesh@worksitebas.com
+          password: abgr ndqa qcjh bhbh
+    # email subject
+          subject: ${{ github.job }} job of ${{ github.repository }} has ${{ job.status }}
+    # email body as text
+          body: ${{ github.job }} job in worflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
+    # comma-separated string, send email to
+          to: bhavishyaramesh02@gmail.com
+    # from email name
+          from: OMHealth 
   
    
   release-content:
