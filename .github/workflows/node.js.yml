@@ -15,7 +15,7 @@ jobs:
          with:
            node-version: ${{ matrix.node-version }}
            cache: 'npm'
-       - run: npm update
+       - run: npm install --save-dev css-loader
  #      - run: npm ci
   
      
