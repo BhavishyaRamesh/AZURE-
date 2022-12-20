@@ -15,7 +15,7 @@ jobs:
          with:
            node-version: ${{ matrix.node-version }}
            cache: 'npm'
-       - run: npm install --save-dev css-loader
+       - run: node --max-old-space-size=4096 `which npm` install
  #      - run: npm ci
   
      
