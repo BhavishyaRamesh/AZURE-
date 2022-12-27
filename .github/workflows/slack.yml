@@ -1,0 +1,40 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+        - master
+jobs:
+  sonarqube:
+     runs-on: ubuntu-latest
+     strategy:
+      matrix:
+        node-version: [16.14.0 ]
+     steps:
+       - uses: actions/checkout@v2
+         with:
+           node-version: ${{ matrix.node-version }}
+           cache: 'npm'
+       - run: npm update
+     
+  
+   
+  release-content:
+     name: 'Release'
+     runs-on: ubuntu-latest 
+     needs: [ sonarqube ]
+     steps:
+       - name: Release
+         id: create_release
+         uses: actions/create-release@v1.0.0
+         env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+         with:
+            tag_name: V${{ github.run_number }}
+            release_name: V${{ github.run_number }}
+            body: ${{ github.run_number }}
+       - name: Send GitHub Action trigger data to Slack workflow
+         id: slack
+         uses: slackapi/slack-github-action@v1.23.0
+         env:
+            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
