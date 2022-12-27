@@ -21,8 +21,7 @@ jobs:
         id: slack
         uses: slackapi/slack-github-action@v1.23.0
         with:
-         # For posting a rich message using Block Kit
-         payload: |
+           payload: |
             {
                 "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
                 "blocks": [
@@ -31,10 +30,10 @@ jobs:
                     "text": {
                      "type": "mrkdwn",
                      "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+               }
+              }
+             ]
             }
-          }
-        ]
-      }
-  env:
-    SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-    SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        env:
+            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
