@@ -10,10 +10,12 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-      - uses: 8398a7/action-slack@v3
+      - uses: actions/checkout@v2
+      - name: Notify Slack Test Result
+        uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.12-alpha
         with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
-        env:
-           SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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 # required
-        if: always() # Pick up events even if the job fails or is canceled.
+          title:  Tests
+         
+          slackbottoken: xoxb-4485946186354-4553878809639-Ki4XZWi65Ai7HgquGfN4mV5w 
+          slackchannel: 'C04H2TAUJJD'
+        
