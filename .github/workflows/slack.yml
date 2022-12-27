@@ -16,9 +16,17 @@ jobs:
          with:
            payload: |
             {
-                "text": "GitHub Action build result: success",
-              
-            }
+                "text": "GitHub Action build result: ${{ job.status }}",
+                "blocks": [
+                 {
+                      "type": "section",
+                      "text": {
+                         "type": "mrkdwn",
+                         "text": "GitHub Action build result: ${{ job.status }}"
+                    }
+                    }
+                  ]     
+               }
          env:
-            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
             SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
