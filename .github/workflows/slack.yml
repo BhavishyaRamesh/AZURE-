@@ -10,11 +10,12 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-       - name: Post to a Slack channel
-         id: slack
-         uses: slackapi/slack-github-action@v1.23.0
+       - name: Post message to Slack via botToken
+         id: slackToken
+         uses: ./
          with:
-            channel-id: 'D04GSRSHM28'
-            slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+           channel-id: C04ECC1JUCC
+           slack-message: 'CI Post from slack-send GitHub Action! Succeeded!!'
+           # payload: "{\"key\":\"value\",\"foo\":\"bar\"}"
          env:
-            SLACK_BOT_TOKEN: xoxb-4485946186354-4553878809639-5ZQTGTJy928u71p3dMwIx3eB
+           SLACK_BOT_TOKEN: xoxb-4485946186354-4553878809639-u2iuH5Ia0bgOx9J7v9jKtBVo
