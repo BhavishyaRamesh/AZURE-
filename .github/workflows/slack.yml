@@ -16,6 +16,6 @@ jobs:
         with:
           title:  Tests
          
-          slackbottoken: xoxb-4485946186354-4553878809639-Ki4XZWi65Ai7HgquGfN4mV5w 
+          slackbottoken: xoxb-4485946186354-4553878809639-gRBUwBuKBjU2tsX8TGElgscu
           slackchannel: 'C04H2TAUJJD'
         
