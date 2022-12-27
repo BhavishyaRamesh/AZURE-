@@ -10,10 +10,9 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-     - name: Notify slack
-       uses: pullreminders/slack-action@master
-       with:
-         channel-id: 'C04GSAVTU2Y'
-         slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-       env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      - name: Notify slack
+        env:
+           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: pullreminders/slack-action@master
+        with:
+           args: '{\"channel\":\"C04GSAVTU2Y\",\"text\":\"Hello world\"}'
