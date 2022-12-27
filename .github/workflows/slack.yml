@@ -10,8 +10,11 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-       - uses: actions/checkout@v2
-       - name: Slack Notification
-         uses: rtCamp/action-slack-notify@v2
+       - name: Post to a Slack channel
+         id: slack
+         uses: slackapi/slack-github-action@v1.23.0
+         with:
+           channel-id: C04G0QF1ZMM
+           slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
          env:
-           SLACK_WEBHOOK: https://hooks.slack.com/services/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
+            SLACK_BOT_TOKEN: xoxb-1084467806503-4591984927600-nM3x3w3RYg3t2urngk00NJkY
