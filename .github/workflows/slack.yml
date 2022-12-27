@@ -1,4 +1,4 @@
-name:  slack
+name: Docker Build and Push
 
 on:
   push:
@@ -8,32 +8,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      job_status: Sucess
+      job.status: success
+      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
     steps:
-      - uses: actions/checkout@v2
+      - uses: act10ns/slack@v1
         with:
-           node-version: ${{ matrix.node-version }}
-           cache: 'npm'
-      - run: npm update
-      - run: npm install
+          status: starting
+          channel: '#github_to_slack'
+        if: always()
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build
+        id: build
+        run: |
+         npm install
+         npm run build
 
-      - name: Send custom JSON data to Slack workflow
-        id: slack
-        uses: slackapi/slack-github-action@v1.23.0
+      - uses: act10ns/slack@v1
         with:
-           payload: |
-            {
-                "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
-                "blocks": [
-              {
-                    "type": "section",
-                    "text": {
-                     "type": "mrkdwn",
-                     "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
-               }
-              }
-             ]
-            }
-        env:
-            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          status: ${{ job.status }}
+          channel: '#github_to_slack'
+          message: 'You rock!'
+        if: always()
