@@ -10,11 +10,23 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-       - name: Post to a Slack channel
+       - name: Send custom JSON data to Slack workflow
          id: slack
          uses: slackapi/slack-github-action@v1.23.0
          with:
-           channel-id: C04ECC1JUCC
-           slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+           payload: |
+            {
+                "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+                "blocks": [
+                  {
+                    "type": "section",
+                    "text": {
+                     "type": "mrkdwn",
+                     "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
+                }
+              }
+             ]
+            }
          env:
-            SLACK_BOT_TOKEN: xoxb-4485946186354-4553878809639-joE8Bt0kfwSYpbaABhWiOgML
+            SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+            SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
