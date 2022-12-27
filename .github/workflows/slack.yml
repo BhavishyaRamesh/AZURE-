@@ -1,0 +1,32 @@
+name:  slack
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+    steps:
+      - uses: act10ns/slack@v1
+        with:
+          status: starting
+          channel: '#github_to_slack'
+        if: always()
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+           node-version: ${{ matrix.node-version }}
+           cache: 'npm'
+       - run: npm update
+       - run: npm install
+
+      - uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: '#github_to_slack'
+          message: 'You rock!'
+        if: always()
