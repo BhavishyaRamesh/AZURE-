@@ -8,7 +8,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
     steps:
       - uses: act10ns/slack@v1
         with:
