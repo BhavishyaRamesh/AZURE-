@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Notify Slack Test Result
-        uses: sanjaykrishnanrs/slack-notify-junitxml-action@0.1.12-alpha
+        uses: 8398a7/action-slack@v3
         with:
           title:  Tests
          
