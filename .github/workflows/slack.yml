@@ -5,28 +5,18 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  slackNotification:
+    name: Slack Notification
     runs-on: ubuntu-latest
-    env:
-      job.status: success
-      SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+   
     steps:
-      - uses: act10ns/slack@v1
-        with:
-          status: starting
-          channel: '#github_to_slack'
-        if: always()
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Build
-        id: build
-        run: |
-         npm install
-         npm run build
-
-      - uses: act10ns/slack@v1
-        with:
-          status: ${{ job.status }}
-          channel: '#github_to_slack'
-          message: 'You rock!'
-        if: always()
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: general
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+          SLACK_ICON: https://worksitelabs-lvj6468.slack.com/
+          SLACK_MESSAGE: 'Post Content :rocket:'
+          SLACK_TITLE: Post Title
+          SLACK_USERNAME: ramesh
+          SLACK_WEBHOOK: https://hooks.slack.com/services/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
