@@ -17,4 +17,4 @@ jobs:
            channel-id: C04ECC1JUCC
            slack-message: "GitHub build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
          env:
-            SLACK_BOT_TOKEN: xapp-1-A04GMDHTYJH-4592125937760-470ada07a5d3a4353eaad04dbb53f059256fe5a6bd57e1abb1c179b25fe19e1d
+            SLACK_BOT_TOKEN: xoxb-4485946186354-4553878809639-zBWOX4yut1a5lsmZEJJ8AaFu
