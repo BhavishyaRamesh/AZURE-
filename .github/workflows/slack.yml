@@ -1,4 +1,4 @@
-name: Docker Build and Push
+name: Slack
 
 on:
   push:
@@ -10,13 +10,8 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: general
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://worksitelabs-lvj6468.slack.com/
-          SLACK_MESSAGE: 'Post Content :rocket:'
-          SLACK_TITLE: Post Title
-          SLACK_USERNAME: ramesh
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+       - uses: actions/checkout@v2
+       - name: Slack Notification
+         uses: rtCamp/action-slack-notify@v2
+         env:
+           SLACK_WEBHOOK: https://hooks.slack.com/services/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
