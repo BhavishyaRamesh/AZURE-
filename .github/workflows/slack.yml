@@ -10,12 +10,10 @@ jobs:
     runs-on: ubuntu-latest
    
     steps:
-      - uses: actions/checkout@v2
-      - name: Notify Slack Test Result
-        uses: 8398a7/action-slack@v3
-        with:
-          title:  Tests
-         
-          slackbottoken: xoxb-4485946186354-4553878809639-gRBUwBuKBjU2tsX8TGElgscu
-          slackchannel: 'C04H2TAUJJD'
+     - name: Notify slack
+       env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+       uses: pullreminders/slack-action@master
+       with:
+          args: '{\"channel\":\"C04H2TAUJJD\",\"text\":\"Hello world\"}'
         
