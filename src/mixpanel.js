@@ -6,6 +6,6 @@ import mixpanel from 'mixpanel-browser';
 // but it's recommended you remove it for production
 mixpanel.init('f4dbbe710a5fc4b98189e3366b94f8e3', {debug: true}); 
 mixpanel.track('Sign Up', {
-  'source': "Gmail",
+  'source': "Pat's affiliate site",
   'Opted out of email': true,
 });
