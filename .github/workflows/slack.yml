@@ -2,7 +2,7 @@ name: Slack
 
 on:
   push:
-    branches: [ ]
+    branches: [dev]
 
 jobs:
   slackNotification:
